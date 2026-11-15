@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="CYBER MONEY ALERT - bảng điều khiển thông báo tiền vào.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cyber Alert">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>CYBER MONEY ALERT</title>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"><span class="brand-wave">)))</span></div>
+        <div><div class="brand-name">CYBER <b>MONEY</b></div><div class="brand-sub">VOICE ALERT SYSTEM <span class="version">V1.0</span></div></div>
+      </div>
+      <button class="icon-button" id="installBtn" aria-label="Cài ứng dụng" title="Cài ứng dụng" hidden>＋</button>
+    </header>
+
+    <section class="hero panel">
+      <div class="hero-top"><span class="eyebrow"><i class="live-dot"></i> LOCAL DEMO MODE</span><span class="secure-label">● DỮ LIỆU LƯU TRÊN THIẾT BỊ</span></div>
+      <div class="hero-title">Thông báo<br><span>tiền vào.</span></div>
+      <p class="hero-copy">Bảng điều khiển đọc số tiền bằng giọng nói tiếng Việt.</p>
+      <div class="balance-label">TỔNG TIỀN VÀO TRONG LỊCH SỬ</div>
+      <div class="balance" id="totalAmount">0 <small>₫</small></div>
+      <div class="hero-bottom">
+        <div class="connection"><span class="connection-icon">◎</span><span id="connectionText">Chế độ thử nghiệm · Chưa kết nối ngân hàng</span></div>
+        <span class="pill pill-red">DEMO</span>
+      </div>
+    </section>
+
+    <section class="quick-grid">
+      <button class="action-card primary-action" id="testIncoming">
+        <span class="action-icon">↙</span><span class="action-title">Thử tiền vào</span><span class="action-note">Tạo giao dịch mẫu</span>
+      </button>
+      <button class="action-card" id="speakTest">
+        <span class="action-icon sound-icon">♫</span><span class="action-title">Thử giọng đọc</span><span class="action-note">Nghe câu thông báo</span>
+      </button>
+    </section>
+
+    <section class="panel settings-panel">
+      <div class="section-heading"><div><div class="eyebrow">CÁ NHÂN HÓA</div><h2>Cài đặt đọc tiền</h2></div><span class="settings-symbol">⚙</span></div>
+      <div class="setting-row">
+        <div><div class="setting-name">Đọc tự động</div><div class="setting-desc">Đọc khi tạo giao dịch thử mới</div></div>
+        <label class="switch"><input type="checkbox" id="autoSpeak" checked><span class="slider"></span></label>
+      </div>
+      <div class="setting-row">
+        <div><div class="setting-name">Giọng tiếng Việt</div><div class="setting-desc" id="voiceStatus">Dùng giọng vi-VN có sẵn trên Safari</div></div>
+        <span class="voice-tag">VI-VN</span>
+      </div>
+      <div class="setting-row volume-row">
+        <div><div class="setting-name">Tốc độ đọc</div><div class="setting-desc">Điều chỉnh tốc độ giọng nói</div></div>
+        <div class="range-wrap"><input type="range" id="speechRate" min="0.75" max="1.15" step="0.05" value="0.9"><output id="rateValue">0.90×</output></div>
+      </div>
+      <div class="setting-row">
+        <div><div class="setting-name">Thông báo trình duyệt</div><div class="setting-desc" id="notifyStatus">Chỉ dùng cho thông báo của web app</div></div>
+        <button class="small-button" id="notifyBtn">Bật</button>
+      </div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="section-heading history-heading"><div><div class="eyebrow">HOẠT ĐỘNG GẦN ĐÂY</div><h2>Lịch sử tiền vào <span class="count" id="transactionCount">0</span></h2></div><button class="text-button" id="clearHistory">Xóa lịch sử</button></div>
+      <div class="filter-tabs" role="group" aria-label="Lọc giao dịch">
+        <button class="filter active" data-filter="all">Tất cả</button>
+        <button class="filter" data-filter="incoming">Tiền vào</button>
+      </div>
+      <div id="emptyState" class="empty-state"><div class="empty-icon">↙</div><b>Chưa có giao dịch</b><span>Nhấn “Thử tiền vào” để kiểm tra giao diện và giọng đọc.</span></div>
+      <div id="transactionList" class="transaction-list"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-brand">CYBER MONEY ALERT <span>•</span> V1.0</div>
+      <p>Ứng dụng thử nghiệm độc lập. Không phải ứng dụng chính thức của Techcombank.</p>
+      <p class="footer-warning">Không thể đọc thông báo riêng của Techcombank trên iOS. Không nhập mật khẩu, OTP hoặc thông tin ngân hàng vào ứng dụng này.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
